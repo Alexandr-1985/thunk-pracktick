@@ -1,3 +1,6 @@
+import { Dispatch } from "redux";
+import { userAPI } from "../dall/api";
+
 const initionalState = {
   users: [] as UserType[],
 };
@@ -20,6 +23,15 @@ export const usersAC = (users: Array<UserType>) => {
   return {
     type: "SET-USERS",
     users: users,
+  };
+};
+
+export const usersTC = () => {
+  return (dispatch: Dispatch) => {
+    userAPI.getUsers().then((res) => {
+      const users = res.data;
+      dispatch(usersAC(users));
+    });
   };
 };
 
