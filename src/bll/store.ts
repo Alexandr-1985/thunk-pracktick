@@ -1,7 +1,9 @@
 import { combineReducers, createStore } from "redux";
-import { userReducer } from "../bll/userReducer";
+import { usersReducer } from "../bll/userReducer";
 
 const rootReducer = combineReducers({
-  users: userReducer,
+  users: usersReducer,
 });
 export const store = createStore(rootReducer);
+
+export type AppRootStateType = ReturnType<typeof rootReducer>;

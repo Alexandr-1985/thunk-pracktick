@@ -1,4 +1,35 @@
-type UserType = {
+const initionalState = {
+  users: [] as UserType[],
+};
+type InitialStateType = typeof initionalState;
+export const usersReducer = (
+  state: InitialStateType = initionalState,
+  action: UsersAT
+): InitialStateType => {
+  switch (action.type) {
+    case "SET-USERS":
+      return {
+        ...state,
+        users: [...state.users, ...action.users],
+      };
+  }
+  return state;
+};
+
+export const usersAC = (users: Array<UserType>) => {
+  return {
+    type: "SET-USERS",
+    users: users,
+  };
+};
+
+//type
+export type UsersAT = {
+  type: "SET-USERS";
+  users: Array<UserType>;
+};
+
+export type UserType = {
   id: number;
   name: string;
   username: string;
@@ -19,32 +50,5 @@ type UserType = {
     name: string;
     catchPhrase: string;
     bs: string;
-  };
-};
-
-const initionalState = {
-  users: [],
-};
-
-export const userReducer = (state: any = initionalState, action: UserAT) => {
-  switch (action.type) {
-    case "SET-USERS":
-      return {
-        ...state,
-        users: [...state.users, ...action.users],
-      };
-  }
-  return state;
-};
-
-export type UserAT = {
-  type: "SET-USERS";
-  users: Array<UserType>;
-};
-
-export const userAC = (users: Array<UserType>) => {
-  return {
-    type: "SET-USERS",
-    users: users,
   };
 };
