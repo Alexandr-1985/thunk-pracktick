@@ -3,13 +3,12 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { usersTC, UserType } from "./bll/userReducer";
 import { AppRootStateType } from "./bll/store";
+import { useAppDispatch, useAppSelector } from "./hook";
 
 function App() {
-  const users = useSelector<AppRootStateType, Array<UserType>>((state) => {
-    return state.users.users;
-  });
+  const users = useAppSelector((state) => state.users.users);
   console.log(users);
-  const dispatch: any = useDispatch();
+  const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(usersTC());
   }, [dispatch]);
